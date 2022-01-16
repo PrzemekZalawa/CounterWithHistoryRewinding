@@ -88,7 +88,11 @@ class Game extends React.Component {
           if (this.checkForGameOver(upWithRandom)) {
             this.setState({board: upWithRandom, gameOver: true, message: 'Game over!'});
           } else {
+<<<<<<< HEAD
             this.setState({board: upWithRandom, score: this.state.score += movedUp.score});  
+=======
+            this.setState({board: upWithRandom});  
+>>>>>>> d5fc6739c30cbb74f0745d589c0f52af066b490d
           }
         }
       } else if (direction === 'right') {
@@ -99,7 +103,11 @@ class Game extends React.Component {
           if (this.checkForGameOver(rightWithRandom)) {
             this.setState({board: rightWithRandom, gameOver: true, message: 'Game over!'});
           } else {
+<<<<<<< HEAD
             this.setState({board: rightWithRandom, score: this.state.score += movedRight.score});  
+=======
+            this.setState({board: rightWithRandom});  
+>>>>>>> d5fc6739c30cbb74f0745d589c0f52af066b490d
           }
         }
       } else if (direction === 'down') {
@@ -110,7 +118,11 @@ class Game extends React.Component {
           if (this.checkForGameOver(downWithRandom)) {
             this.setState({board: downWithRandom, gameOver: true, message: 'Game over!'});
           } else {
+<<<<<<< HEAD
             this.setState({board: downWithRandom, score: this.state.score += movedDown.score});
+=======
+            this.setState({board: downWithRandom});
+>>>>>>> d5fc6739c30cbb74f0745d589c0f52af066b490d
           }
         }
       } else if (direction === 'left') {
@@ -121,14 +133,25 @@ class Game extends React.Component {
           if (this.checkForGameOver(leftWithRandom)) {
             this.setState({board: leftWithRandom, gameOver: true, message: 'Game over!'});  
           } else {
+<<<<<<< HEAD
             this.setState({board: leftWithRandom, score: this.state.score += movedLeft.score});
+=======
+            this.setState({board: leftWithRandom});
+>>>>>>> d5fc6739c30cbb74f0745d589c0f52af066b490d
           }
         }
       }
     } else {
+<<<<<<< HEAD
       this.setState({message: 'Game over!'});
     }
   }
+=======
+      this.setState({message: 'Game over. Please start a new game.'});
+    }
+  }
+  
+>>>>>>> d5fc6739c30cbb74f0745d589c0f52af066b490d
   moveUp(inputBoard) {
     let rotatedRight = this.rotateRight(inputBoard);
     let board = [];
@@ -287,15 +310,21 @@ class Game extends React.Component {
       this.boardMoved(board, this.moveDown(board).board),
       this.boardMoved(board, this.moveLeft(board).board)
     ];
+<<<<<<< HEAD
       
     return (moves.includes(true)) ? false : true ;
+=======
+    
+    return (moves.includes(true)) ? false : true;
+>>>>>>> d5fc6739c30cbb74f0745d589c0f52af066b490d
   }
   
   componentWillMount() {
     this.initBoard();  
     const body = document.querySelector('body');
-    body.addEventListener('keydown', this.handleKeyDown.bind(this));
+    
   }
+<<<<<<< HEAD
   handleKeyDown(e) {
     const up = 38;
     const right = 39;
@@ -312,6 +341,9 @@ class Game extends React.Component {
       this.move('left');
     }
   }
+=======
+  
+>>>>>>> d5fc6739c30cbb74f0745d589c0f52af066b490d
  
     
   render() {
@@ -320,8 +352,18 @@ class Game extends React.Component {
       <h1>Przemek Zaława & Mateusz Cupiał - 2048</h1>                     
         <table>
           {this.state.board.map((row, i) => (<Row key={i} row={row} />))}
+<<<<<<< HEAD
         </table>    
         <p>{this.state.message}</p>
+=======
+        </table>
+        <div className="buttons">
+          <button className="button" onClick={() => {this.move('up')}}>Up</button>
+          <button className="button" onClick={() => {this.move('right')}}>Right</button>
+          <button className="button" onClick={() => {this.move('down')}}>Down</button>
+          <button className="button" onClick={() => {this.move('left')}}>Left</button>
+        </div>      
+>>>>>>> d5fc6739c30cbb74f0745d589c0f52af066b490d
       </div>
     );
   }
