@@ -1,68 +1,77 @@
 import ReactDOM from 'react-dom';
 import './index.css';
-import React from "react";
+
 import react from 'react';
 import reactDom from 'react-dom';
+import React, { useState } from 'react';
 
-//Przemek Zaława 3F
 
-class Button extends react.Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      value: 0,
-      history:[   ]
-    }
-    this.handleClick = this.handleClick.bind(this);
-    this.rewind = this.rewind.bind(this);
-
-  }
-  rewind(essa){
-    
-    
-    const rigcz = this.state.history
-    
-    const eniu = rigcz.slice(0,essa)
-    
-    this.setState({history:eniu})
-    this.setState({
-      value:essa
-    })
-
-  }
+//Przemek Zaława 
+function  List(){
+  let [Groceries, setGroceries] = useState([
+    {name: "cebularz", price: 2.79},
+    {name: "croissant", price: 2.99}
+  ]);
   
-  handleClick(){
-    const cos = this.state.history
-    
-    cos.push(this.state.value)
-    
-    this.setState({history:cos})
+  let [ShoppingCart, setShoppingCart] =useState([])
 
-    const x = this.state.value+1
-    this.setState({value: x})
+  const addToCart = (price,name) => {
+    let newArray = [...ShoppingCart]
+    newArray[newArray.length]= {  
+    name: name,
+    price: price
+    }
+    setShoppingCart(newArray);
+    
+  }
+  let amountOfProducts = 0
+  let howMuchToPay = 0
+  ShoppingCart.map((element, i) =>(
+    amountOfProducts++,
+    howMuchToPay+=element.price
+  ));
+  let ListOfGroceries = Groceries.map((element, i) =>(
+    <li key={element+i}>
+      {element.name}:  {element.price} zł  
+      <button onClick={()=> addToCart(element.price,element.name) }>Dodaj</button>
+    </li>
+  ));
 
+  let ListOfShoppings = ShoppingCart.map((element, i) =>(
+    <li key={element+i}>
+      {element.name}:  {element.price} zł  
+    </li>
+  ));
+
+  const addProduct = (event) => {
+    event.preventDefault();
+
+    let newArray = [...Groceries]
+    newArray[newArray.length]= {  
+    name: event.target.name.value,
+    price:  parseInt(event.target.price.value)
+    }
+    setGroceries(newArray);
   }
 
-  render(){
-
-  const myArrCreatedFromMap = this.state.history.map((item, i) =>
-   (<li key={item + i}>
-   <button className='historyButton' onClick={()=>this.rewind(item)}>{item}</button>
-   </li>));
-
-  const myList = (
-  <ul>{myArrCreatedFromMap}</ul> )
-    
-
-    return(
-      <div>
-        <h1>Licznik ale jak sie pomylisz to możesz się cofnąc </h1>
-        <button className='mainButton' onClick={this.handleClick}>{this.state.value}</button>
-        {myList} 
-      </div>
-    )
-  }
+  return(
+    <div>
+    <h1>Przemek Zaława 3F</h1>
+    <h3>Dodawanie produktów</h3>
+    <form onSubmit={addProduct}>
+      nazwa:<input type="text" name="name"></input>
+      <br/>
+      cena:<input type="number" name="price" step="0.01"></input>
+      <br/>
+      <input type="submit" value="Dodaj"/>
+    </form>
+    <h3>Lista produktów</h3>
+    <ul>{ListOfGroceries}</ul>
+    <h3>Koszyk</h3>
+    <p>Ilosc produktów: {amountOfProducts}</p>
+    <p>Ilosc produktów: {howMuchToPay} zł</p>
+    <ul>{ListOfShoppings}</ul>
+    </div>
+  )
 }
-
-
-ReactDOM.render(<Button/>, document.getElementById('root'));
+reactDom.render(<List/>,document.getElementById('root'))
